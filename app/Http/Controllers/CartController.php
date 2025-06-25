@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Cart;
+use App\Models\Product;
+use App\Models\FrontendUser;
+use Illuminate\Support\Facades\Auth;
+
+class CartController extends Controller
+{
+    // 🛒 Show Cart Page
+    public function index()
+    {
+        $user_id = Auth::guard('frontend')->id();
+        $cart_items = Cart::where('user_id', $user_id)->with('product')->get();
+
+        return view('cart', compact('cart_items'));
+    }
+
+    // ➕ Add Product to Cart
+    public function addcart(Request $request)
+    {
+        if (!Auth::guard('frontend')->check()) {
+            return redirect()->back()->with('status', 'Please login first.');
+        }
+
+        $cart = new Cart;
+        $cart->user_id = Auth::guard('frontend')->id();
+        $cart->product_id = $request->product_id;
+        $cart->quantity = $request->quantity;
+        $cart->price = $request->price;
+        $cart->save();
+
+        // ✅ Fetch updated cart items
+        $user_id = Auth::guard('frontend')->id();
+        $cart_items = Cart::where('user_id', $user_id)->with('product')->get();
+
+        return view('cart', compact('cart_items'))->with('status', 'Item added successfully');
+    }
+
+    // 🔄 Update Cart Quantity
+    public function updateCart(Request $request, string $id)
+    {
+        $tcart = Cart::findOrFail($id);
+
+        if ($request->action == 'plus') {
+            $tcart->quantity += 1;
+        } elseif ($request->action == 'minus' && $tcart->quantity > 1) {
+            $tcart->quantity -= 1;
+        }
+
+        $tcart->save();
+
+        // ✅ Fetch updated cart items again
+        $user_id = Auth::guard('frontend')->id();
+        $cart_items = Cart::where('user_id', $user_id)->with('product')->get();
+
+        return view('cart', compact('cart_items'))->with('success', 'Cart updated');
+    }
+     public function destroy(string $id){
+        $cart = Cart::findOrFail($id);
+    $cart->delete();
+    return redirect()->route('cart');
+    }
+}
+
