@@ -16,25 +16,25 @@ class HomeController extends Controller
     $data['subcategory'] = SubCategory::all();
 
     if ($request->ajax() && $request->action == "search_product") {
-        $sub_cat_id = $request->sub_cate_id; // li se get ho raha
+        $sub_cat_id = $request->sub_cate_id; 
         $products = Product::where('sub_cate_id', $sub_cat_id)->get();
         $data['products'] = $products;
 
-        // front_product ka partial view ajax se bhej rahe hain
+       
         return response()->json([
             'products_view' => view('front_product', $data)->render()
         ]);
     }
 
     $data['products'] = Product::all();
-    return view('index')->with($data); // default page load
+    return view('index')->with($data); 
 }
 
    public function shop(Request $request)
 {
    $products=Product::paginate(9);
 
-    // Agar AJAX request aaye
+   
     if ($request->ajax())
      {
         if ($request->sub_link) 
@@ -58,7 +58,7 @@ class HomeController extends Controller
          $data['products'] = $products;
 
        if($request->ajax()){
-        // return view('shop2_products')->with($data);
+
         return response()->json([
             'viewshop' => view('shop2_products', $data)->render()
         ]);
@@ -66,7 +66,7 @@ class HomeController extends Controller
         
   
 
-    // Default full page load ke liye
+   
     // $data['products'] = Product::all();
     return view('shop')->with($data);
 }

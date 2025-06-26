@@ -41,7 +41,7 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'frontend' => [ // 👈 ye add karein
+        'frontend' => [ // add
         'driver' => 'session',
         'provider' => 'frontend_users',
     ],
@@ -75,7 +75,7 @@ return [
         //     'table' => 'users',
         // ],
         
-    'frontend_users' => [ // 👈 ye lazmi hai
+    'frontend_users' => [ // add
         'driver' => 'eloquent',
         'model' => App\Models\FrontendUser::class,
     ],

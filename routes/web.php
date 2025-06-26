@@ -13,7 +13,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 
-//products-routes//
+//frontend-routes//
 Route::get('index',[HomeController::class,'index'])->name('index');
 Route::get('shop',[HomeController::class,'shop'])->name('shop');
 

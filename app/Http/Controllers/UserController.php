@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
  use App\Models\User;
 class UserController extends Controller
 {
-    //show users list
+  
     public function show(){
         $users=User::whereNot('role',1)->get();
     //    $users=User::all();
