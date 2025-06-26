@@ -83,23 +83,49 @@
         </div>
 
         <div class="row g-4 justify-content-end">
-            <div class="col-8"></div>
-            <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                <div class="bg-light rounded">
-                    <div class="p-4">
-                        <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
-                        <div class="d-flex justify-content-between mb-4">
-                            <h5 class="mb-0 me-4">Subtotal: Rs. {{ number_format($total, 2) }}</h5>
-                        </div>
+    <div class="col-8"></div>
+    <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
+        <div class="bg-light rounded">
+            <div class="p-4">
+                <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
+                <div class="d-flex justify-content-between mb-4">
+                    <h5 class="mb-0 me-4">Subtotal: Rs. {{ number_format($total, 2) }}</h5>
+                </div>
+
+              
+                <form action="{{route('checkout')}}" method="POST" class="text-center">
+                    @csrf
+
+                    <!-- Full Name -->
+                    <div class="mb-3 d-flex justify-content-center">
+                        <input type="text" name="full_name" class="form-control w-80" placeholder="Full Name" required>
                     </div>
-                   <a href="{{ route('checkout') }}" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">
-    Proceed Checkout
-</a>
-    </div>
+
+                    <!-- Address -->
+                    <div class="mb-3 d-flex justify-content-center">
+                        <textarea name="address" class="form-control w-80" placeholder="Address" rows="3" required></textarea>
+                    </div>
+                     <!-- totalPhone Number -->
+                    <div class="mb-3 d-flex justify-content-center">
+                        <input type="hidden" name="total"  value="{{ $total }}"required>
+                    </div>
+                    <!-- Phone Number -->
+                    <div class="mb-3 d-flex justify-content-center">
+                        <input type="text" name="phone" class="form-control w-80" placeholder="Phone" required>
+                    </div>
+
+                    <!-- Checkout Button -->
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-primary">Checkout</button>
+                    </div>
+                </form>
+               
+
             </div>
         </div>
     </div>
 </div>
+
 <!-- Cart Page End -->
 
 @endsection

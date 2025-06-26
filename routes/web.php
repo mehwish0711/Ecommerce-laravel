@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 //admin-Dashboard-products-routes//
 Route::get('index',[HomeController::class,'index'])->name('index');
@@ -32,9 +33,6 @@ Route::get('shop-detail', function () {
 
 
 
-Route::get('checkout', function () {
-    return view('checkout');
-})->name('checkout');
 
 Route::get('contact', function () {
     return view('contact');
@@ -83,5 +81,5 @@ Route::delete('cart/delete/{id}', [CartController::class, 'destroy'])->name('car
 
 // checkout route//
 
-// Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
  

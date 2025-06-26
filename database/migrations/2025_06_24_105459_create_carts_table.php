@@ -17,14 +17,14 @@ return new class extends Migration
                   ->constrained('frontend_users')
                   ->onDelete('cascade');
 
-            // Product that is added to cart
+            
             $table->foreignId('product_id')
                   ->constrained('products')
                   ->onDelete('cascade');
 
-            // Quantity of product
+           
             $table->integer('quantity')->default(1);
-            $table->decimal('price', 10, 2); // Product price at time of adding to cart
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }

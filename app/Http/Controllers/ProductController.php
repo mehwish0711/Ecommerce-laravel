@@ -58,23 +58,22 @@ return redirect()->route('product');
         $product->sub_cate_id = $request->sub_category;
         $product->description = $request->description;
 
-          // Image upload check
+          //Image upload check
     if ($request->hasFile('image')) {
         $image = $request->file('image');
 
-        // Purani image delete karo agar mojood hai
+        
         if ($product->image && file_exists(public_path('uploads/images/' . $product->image))) {
             unlink(public_path('uploads/images/' . $product->image));
         }
 
-        // New image ka unique naam generate karo
         $extension = $image->getClientOriginalExtension();
         $newImageName = time() . rand(10000, 99999) . '.' . $extension;
 
-        // Image ko move karo uploads folder mein
+       
         $image->move(public_path('uploads/images'), $newImageName);
 
-        // DB mein image ka naam save karo
+        
         $product->image = $newImageName;
     }
 

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    // 🛒 Show Cart Page
+
     public function index()
     {
         $user_id = Auth::guard('frontend')->id();
@@ -33,7 +33,6 @@ class CartController extends Controller
         $cart->price = $request->price;
         $cart->save();
 
-        // ✅ Fetch updated cart items
         $user_id = Auth::guard('frontend')->id();
         $cart_items = Cart::where('user_id', $user_id)->with('product')->get();
 
@@ -53,7 +52,7 @@ class CartController extends Controller
 
         $tcart->save();
 
-        // ✅ Fetch updated cart items again
+       
         $user_id = Auth::guard('frontend')->id();
         $cart_items = Cart::where('user_id', $user_id)->with('product')->get();
 
