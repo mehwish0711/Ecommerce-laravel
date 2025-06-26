@@ -107,7 +107,7 @@
                     </div>
                      <!-- totalPhone Number -->
                     <div class="mb-3 d-flex justify-content-center">
-                        <input type="hidden" name="total"  value="{{ $total }}"required>
+                        <input type="hidden" name="bill"  value="{{ $total }}"required>
                     </div>
                     <!-- Phone Number -->
                     <div class="mb-3 d-flex justify-content-center">

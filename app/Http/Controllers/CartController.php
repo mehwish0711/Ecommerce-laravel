@@ -19,7 +19,7 @@ class CartController extends Controller
         return view('cart', compact('cart_items'));
     }
 
-    // ➕ Add Product to Cart
+   
     public function addcart(Request $request)
     {
         if (!Auth::guard('frontend')->check()) {
@@ -39,7 +39,7 @@ class CartController extends Controller
         return view('cart', compact('cart_items'))->with('status', 'Item added successfully');
     }
 
-    // 🔄 Update Cart Quantity
+   
     public function updateCart(Request $request, string $id)
     {
         $tcart = Cart::findOrFail($id);
