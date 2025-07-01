@@ -21,7 +21,7 @@
                    <form action="{{ route('add.cart', $product->id) }}" method="POST" style="display:inline;" >
     @csrf
     <input type="hidden" name="product_id" value="{{ $product->id }}">
-    <input type="hidden" name="price" value="{{ $product->discount_price ?? $product->price }}">
+    <input type="hidden" name="price" value="{{ $product->price }}">
     <input type="hidden" name="quantity" value="1"> {{-- Default quantity 1 --}}
     
    <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary">

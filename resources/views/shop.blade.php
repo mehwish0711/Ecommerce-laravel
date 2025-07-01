@@ -50,7 +50,7 @@
                                                 <li>
                                                     <div class="d-flex justify-content-between fruite-name">
                                                         <a href="javascript:void(0)" class="cate_link" data-cate_id="{{ $cate->id }}"><i class="fas fa-apple-alt me-2"></i>{{$cate->name}}</a>
-                                                        <span>(3)</span>
+                                                        <span>{{ count($category ?? []) }}</span>
                                                     </div>
                                                 </li>
                                              @endforeach
@@ -72,7 +72,7 @@
                                             <div class="mb-2">
                                            
                                                         <a href="#" class="sub-link" data-sub_link="{{ $sub_cate->id }}"><i class="me-2"></i>{{$sub_cate->name}}</a>
-                                                        <!-- <span>(3)</span> -->
+                                                        <span></span>
                                                    
                                             </div>
                                            

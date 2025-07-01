@@ -16,4 +16,8 @@ class FrontendUser extends Authenticatable // 👈 yahan 'Model' ke bajaye 'Auth
        protected $fillable = [
         'name', 'email', 'password', 'phone', 'city', 'address',
     ];
+        public function order()
+{
+    return $this->hasMany(Order::class);
+}
 }

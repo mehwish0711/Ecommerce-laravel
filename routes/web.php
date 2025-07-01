@@ -10,8 +10,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\StripePaymentController;
 
 //frontend-routes//
 Route::get('index',[HomeController::class,'index'])->name('index');
@@ -20,6 +22,7 @@ Route::get('shop',[HomeController::class,'shop'])->name('shop');
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 // Route::get('index', function () {
 //     return view('index');
@@ -56,7 +59,12 @@ Route::get('register',[RegisterController::class,'showRegister'])->name('admin.r
 Route::post('add/register',[RegisterController::class,'addUser'])->name('add.admin');
 Route::post('admin/login',[LoginController::class,'login'])->name('admin.login');
 Route::get('logout',[LoginController::class,'logout'])->name('logout');
+Route::prefix('admin')->group(function () {
+    Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+    Route::get('/orderview/{id}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
+    Route::get('/admin/orders/delete/{id}', [AdminOrderController::class, 'destroy'])->name('admin.orders.delete');
 
+});
 
 //admin-users-routes//--//admin-Dashboard-products-routes//
 Route::middleware('auth')->group(function(){
@@ -75,7 +83,7 @@ Route::resource('categories', CategoryController::class);
 // cart route//
 
 Route::get('cart',[CartController::class,'index'])->name('cart');
-Route::post('cart/{id}',[CartController::class,'addcart'])->name('add.cart');
+Route::post('cart/add/{id}',[CartController::class,'addcart'])->name('add.cart');
 Route::put('cart/update/{id}', [CartController::class, 'updateCart'])->name('update.cart');
 Route::delete('cart/delete/{id}', [CartController::class, 'destroy'])->name('cart.delete');
 
@@ -86,3 +94,12 @@ Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkou
 Route::get('/thankyou', function () {
     return view('thankyou');
 })->name('thankyou');
+
+
+
+
+Route::controller(StripePaymentController::class)->group(function(){
+    Route::get('/stripe', 'stripe')->name('stripe');
+    Route::post('/stripe', 'stripePost')->name('stripe.post');
+});
+

@@ -699,6 +699,9 @@
           }
       });
   });
+
+  // couunt cart
+  
       </script>
       @endpush
 

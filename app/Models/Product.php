@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory; // <- ye factory ke liye hai (optional)
+    use HasFactory; 
 
     protected $guarded = [];
 
@@ -18,4 +18,9 @@ class Product extends Model
    public function subcategory(){
      return $this->belongsTo(SubCategory::class, 'sub_cate_id');
    }
+
+    public function orderitems(){
+    return $this->hasMany(OrderItem::class,'product_id');
+   }
+   
 }

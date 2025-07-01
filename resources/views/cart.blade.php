@@ -28,11 +28,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @php $total = 0; @endphp
+                    @php 
+                    
+                    $total = 0;
+                    
+                    @endphp
                     @foreach($cart_items as $cart)
                     @php
-                        $item_total = $cart->price * $cart->quantity;
-                        $total += $item_total;
+                       
+                    $item_total = $cart->price * $cart->quantity;
+                        
+                    $total += $item_total;
+                    
                     @endphp
                     <tr>
                         <th scope="row">
@@ -61,7 +68,7 @@
                             <p class="mb-0 mt-4">Rs. {{ number_format($item_total, 2) }}</p>
                         </td>
                         <td>
-                            <!-- Optional: Delete button -->
+                           
                             <form action="{{ route('cart.delete', $cart->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -91,35 +98,17 @@
                 <div class="d-flex justify-content-between mb-4">
                     <h5 class="mb-0 me-4">Subtotal: Rs. {{ number_format($total, 2) }}</h5>
                 </div>
+<form action="{{ route('stripe') }}" >
+    @csrf
+    <input type="hidden" name="bill" value="{{ $total }}">
+    <input type="text" name="full_name" placeholder="Full Name" required>
+    <textarea name="address" placeholder="Address" required></textarea>
+    <input type="text" name="phone" placeholder="Phone" required>
 
-              
-                <form action="{{route('checkout')}}" method="POST" class="text-center">
-                    @csrf
+    <button type="submit">Proceed to Payment</button>
+</form>
 
-                    <!-- Full Name -->
-                    <div class="mb-3 d-flex justify-content-center">
-                        <input type="text" name="full_name" class="form-control w-80" placeholder="Full Name" required>
-                    </div>
 
-                    <!-- Address -->
-                    <div class="mb-3 d-flex justify-content-center">
-                        <textarea name="address" class="form-control w-80" placeholder="Address" rows="3" required></textarea>
-                    </div>
-                     <!-- totalPhone Number -->
-                    <div class="mb-3 d-flex justify-content-center">
-                        <input type="hidden" name="bill"  value="{{ $total }}"required>
-                    </div>
-                    <!-- Phone Number -->
-                    <div class="mb-3 d-flex justify-content-center">
-                        <input type="text" name="phone" class="form-control w-80" placeholder="Phone" required>
-                    </div>
-
-                    <!-- Checkout Button -->
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                        <button type="submit" class="btn btn-primary">Checkout</button>
-                    </div>
-                </form>
-               
 
             </div>
         </div>
@@ -127,5 +116,4 @@
 </div>
 
 <!-- Cart Page End -->
-
-@endsection
+ @endsection

@@ -86,7 +86,7 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{route('product')}}">Orders List</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('admin.orders.index')}}">Orders List</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{route('add-products')}}">Order Items</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{route('add-products')}}">Customers</a></li>
                </ul>
